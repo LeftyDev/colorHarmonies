@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=1, minimum-scale=1.0, maximum-scale=1.0">
+    <!--<link rel="stylesheet" href="css/css/font-awesome.min.css">-->
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <style>
+        .hoverhandle {
+            width: 300px;
+            height: 200px;
+            background-color: #000055;
+            transition: all .4s ease-in;
+        }
+
+        .hoverhandle:hover {
+            transition: all .4s ease-out;
+            transform: translateX(200px);
+            background-color: #333333;
+        }
+
+        /*transition applied when being shown*/
+        .slide-fade-enter-active {
+            transition: all 1s ease;
+        }
+
+        /*transition applied when being hidden*/
+        .slide-fade-leave-active {
+            transition: all .5s ease;
+        }
+
+        /*what are the values it will be transitioning to and from?*/
+        .slide-fade-enter, .slide-fade-leave-to {
+            /*.slide-fade-leave-action below version 2.1.8*/
+            transform: translateX(10px);
+            opacity: 0;
+        }
+
+        .pointer {
+            height: 40px;
+            margin: 5px 0 5px 0;
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="app">
+    <button v-on:click="showing = !showing">Show or hide.</button>
+
+    <transition name="slide-fade" tag="div">
+        <div v-if="showing">Hello!</div>
+    </transition>
+
+    <br><br>
+
+    <weather-meter></weather-meter>
+</div>
+
+<br><br><br>
+
+<div class="hoverhandle">
+    Hover over me
+</div>
+
+<script type="text/x-template" id="weather-meter-template">
+    <div>
+        Today's high: {{ high }}
+        <div class="pointer" v-bind:style="{ width: shownHigh + 'px' }"></div>
+        How we feel about this: {{ ourFeelings }}
+    </div>
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

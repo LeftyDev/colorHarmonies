@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=1, minimum-scale=1.0, maximum-scale=1.0">
+    <!--<link rel="stylesheet" href="css/css/font-awesome.min.css">-->
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <style>
+        .meter {
+            height: 30px;
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<!--root app element-->
+<div id="app">
+
+    <win-meter :amount="currentWins"></win-meter>
+    <rock-paper-scissors v-on:win="win" v-on:lose="lose"></rock-paper-scissors>
+
+</div>
+
+<!--template for the RPS component-->
+<script type="text/x-template" id="rps-template">
+    <div>
+        <div>You chose {{ userMove }} : computer chose {{ computerMove }}</div>
+        <div>You {{ outcome }}</div>
+        <button v-on:click="choose('rock')">rock</button>
+        <button v-on:click="choose('paper')">paper</button>
+        <button v-on:click="choose('scissors')">scissors</button>
+    </div>
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
