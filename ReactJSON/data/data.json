@@ -1,0 +1,50 @@
+{
+  "music": [
+    {
+      "artist": "Jank",
+      "album_name": "Versace Summer",
+      "year": "2016",
+      "tracks": [
+        {
+          "name": "Grim Reefer",
+          "runtime": "2:08"
+        },
+        {
+          "name": "Chunks (kool enuff)",
+          "runtime": "2:58"
+        },
+        {
+          "name": "General Tso What?",
+          "runtime": "1:41"
+        },
+        {
+          "name": "This is a Song About my Bike \"Ralph\" and it's Called \"Ralph\"",
+          "runtime": "2:27"
+        }
+      ]
+    },
+    {
+      "artist": "Jank",
+      "album_name": "Awkward Pop Songs",
+      "year": "2015",
+      "tracks": [
+        {
+          "name": "Ouran Highschool Toast Club",
+          "runtime": "3:12"
+        },
+        {
+          "name": "Wut I Liek Abt U",
+          "runtime": "3:00"
+        },
+        {
+          "name": "Racecar Bed",
+          "runtime": "3:42"
+        },
+        {
+          "name": "Caitlyn",
+          "runtime": "4:40"
+        }
+      ]
+    }
+  ]
+}
