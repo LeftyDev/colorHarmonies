@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=1, minimum-scale=1.0, maximum-scale=1.0">
+    <!--<link rel="stylesheet" href="css/css/font-awesome.min.css">-->
+    <!--<link rel="stylesheet" href="css/style.css">-->
+</head>
+<body>
+
+<div id="app">
+    <customer v-on:drip="makeDrip"
+              v-on:french="makeFrench"
+              v-on:aero="makeAero">
+    </customer>
+</div>
+
+<!-- Vue customer component template -->
+<script type="text/x-template" id="customerTemplate">
+    <div>
+        <p>Make a Selection</p>
+        <button v-on:click="choice('dripBrew')">Drip</button>
+        <button v-on:click="choice('frenchPress')">French Press</button>
+        <button v-on:click="choice('aeroPress')">Aeropress</button>
+    </div>
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
