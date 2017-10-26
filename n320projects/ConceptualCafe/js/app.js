@@ -7,7 +7,6 @@ Vue.component("customer", {
     //initiate return data
     data: function () {
         return {
-            customerChoice: "nothing"
         }
     },
     methods: {
@@ -38,22 +37,23 @@ var barista = Vue.component("barista", {
     template: "#baristaTemplate",
     data: function() {
         return {
-            choice: "How may I help you today?"
+            customerChoice: "",
+            baristaPrompt: "How may I help you today?"
         }
     },
     props:[ "choice" ],
     watch: {
         choice: function(choice) {
-            alert(choice + " Barista now has this info.");
             this.choice = choice;
-            if (this.choice == "You ordered drip.") {
-                this.choice = "Barista now knows you ordered drip."
+
+            if (this.choice == "App now knows you ordered drip.") {
+                this.customerChoice = "Barista now knows you ordered drip."
             }
-            if (this.choice == "You ordered french press.") {
-                this.choice = "Barista now knows you ordered french press."
+            if (this.choice == "App now knows you ordered french press.") {
+                this.customerChoice = "Barista now knows you ordered french press."
             }
-            if (this.choice == "You ordered aeropress.") {
-                this.choice = "Barista now knows you ordered aeropress."
+            if (this.choice == "App now knows you ordered aeropress.") {
+                this.customerChoice = "Barista now knows you ordered aeropress."
             }
         }
     }
@@ -75,17 +75,17 @@ new Vue({
     },
     methods: {
         makeDrip: function () {
-            this.choice = "You ordered drip.";
+            this.choice = "App now knows you ordered drip.";
             alert(this.choice);
             //now we need to send this data to the barista
         },
         makeFrench: function () {
-            this.choice = "You ordered french press.";
+            this.choice = "App now knows you ordered french press.";
             alert(this.choice);
             //now we need to send this data to the barista
         },
         makeAero: function () {
-            this.choice = "You ordered aeropress.";
+            this.choice = "App now knows you ordered aeropress.";
             alert(this.choice);
             //now we need to send this data to the barista
         }

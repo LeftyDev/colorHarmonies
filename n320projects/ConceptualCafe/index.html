@@ -8,6 +8,61 @@
     <!--<link rel="stylesheet" href="css/css/font-awesome.min.css">-->
     <!--<link rel="stylesheet" href="css/style.css">-->
 </head>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #app {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .customer {
+        width: 25%;
+        min-height: 75%;
+        background: #bddabd;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .customer button {
+        padding: 20px;
+        background: transparent;
+        min-width: 200px;
+        box-sizing: border-box;
+        border: 1px solid #222222;
+    }
+
+    .customer button:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    .customer button:hover {
+        cursor: pointer;
+    }
+
+    .barista {
+        width: 25%;
+        min-height: 75%;
+        background: #F2D78C;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+</style>
 <body>
 
 <div id="app">
@@ -22,16 +77,19 @@
 
 <!-- Vue customer component template -->
 <script type="text/x-template" id="customerTemplate">
-    <div>
+    <div class="customer">
         <p>Make a Selection</p>
         <button v-on:click="choice('dripBrew')">Drip</button>
         <button v-on:click="choice('frenchPress')">French Press</button>
         <button v-on:click="choice('aeroPress')">Aeropress</button>
     </div>
 </script>
+
+<!-- Vue barista component template -->
 <script type="text/x-template" id="baristaTemplate">
-    <div>
-        <p>{{ choice }}</p>
+    <div class="barista">
+        <p>{{ baristaPrompt }}</p>
+        <p>{{ customerChoice }}</p>
     </div>
 </script>
 
