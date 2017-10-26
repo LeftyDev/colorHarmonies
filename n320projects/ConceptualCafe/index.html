@@ -15,6 +15,9 @@
               v-on:french="makeFrench"
               v-on:aero="makeAero">
     </customer>
+    <barista :choice="choice">
+
+    </barista>
 </div>
 
 <!-- Vue customer component template -->
@@ -24,6 +27,11 @@
         <button v-on:click="choice('dripBrew')">Drip</button>
         <button v-on:click="choice('frenchPress')">French Press</button>
         <button v-on:click="choice('aeroPress')">Aeropress</button>
+    </div>
+</script>
+<script type="text/x-template" id="baristaTemplate">
+    <div>
+        <p>{{ choice }}</p>
     </div>
 </script>
 

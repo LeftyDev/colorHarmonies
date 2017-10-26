@@ -34,8 +34,29 @@ Vue.component("customer", {
     }
 });
 
-Vue.component("barista", {
-    template: "#baristaTemplate"
+var barista = Vue.component("barista", {
+    template: "#baristaTemplate",
+    data: function() {
+        return {
+            choice: "How may I help you today?"
+        }
+    },
+    props:[ "choice" ],
+    watch: {
+        choice: function(choice) {
+            alert(choice + " Barista now has this info.");
+            this.choice = choice;
+            if (this.choice == "You ordered drip.") {
+                this.choice = "Barista now knows you ordered drip."
+            }
+            if (this.choice == "You ordered french press.") {
+                this.choice = "Barista now knows you ordered french press."
+            }
+            if (this.choice == "You ordered aeropress.") {
+                this.choice = "Barista now knows you ordered aeropress."
+            }
+        }
+    }
 });
 
 Vue.component("coffeeMachine", {
