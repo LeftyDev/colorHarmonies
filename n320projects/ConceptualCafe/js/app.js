@@ -41,7 +41,7 @@ var barista = Vue.component("barista", {
             baristaPrompt: "How may I help you today?"
         }
     },
-    props:[ "choice" ],
+    props: [ "choice" ],
     watch: {
         choice: function(choice) {
             this.choice = choice;
