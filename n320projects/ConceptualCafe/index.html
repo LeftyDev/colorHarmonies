@@ -18,6 +18,7 @@
         font-size: 24px;
         text-transform: uppercase;
         letter-spacing: 2px;
+        color: #222222;
     }
 
     #app {
@@ -32,6 +33,7 @@
         width: 25%;
         min-height: 60%;
         background: #bddabd;
+        padding: 50px;
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -44,16 +46,12 @@
         padding: 20px;
         background: transparent;
         border: none;
-        min-width: 200px;
+        width: 100%;
         box-sizing: border-box;
         font-family: 'Quicksand', sans-serif;
         font-size: 20px;
         text-transform: uppercase;
         letter-spacing: 1.5px;
-    }
-
-    .customer button:not(:last-child) {
-        margin-bottom: 20px;
     }
 
     .customer button:hover {
@@ -64,6 +62,20 @@
         width: 25%;
         min-height: 60%;
         background: #F2D78C;
+        padding: 50px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .coffeeMachine {
+        width: 25%;
+        min-height: 60%;
+        background: #4132d5;
+        padding: 50px;
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -79,9 +91,20 @@
               v-on:french="makeFrench"
               v-on:aero="makeAero">
     </customer>
-    <barista :choice="choice">
-
+    <barista v-on:machinedrip="machineDrip"
+             v-on:machinefrench="machineFrench"
+             v-on:machineaero="machineAero"
+             v-bind:choice="choice"
+             v-bind:choicevalue="choiceValue"
+             v-bind:machinemake="machineMake"
+             v-bind:finished="finished">
     </barista>
+    <coffee-machine v-on:dripbrew-finished="dripFinished"
+                    v-on:frenchpress-finished="frenchFinished"
+                    v-on:aeropress-finished="aeroFinished"
+                    v-bind:machinemake="machineMake"
+                    v-bind:brewing="makingCoffee">
+    </coffee-machine>
 </div>
 
 <!-- Vue customer component template -->
@@ -97,8 +120,19 @@
 <!-- Vue barista component template -->
 <script type="text/x-template" id="baristaTemplate">
     <div class="barista">
-        <p>{{ baristaPrompt }}</p>
-        <p>{{ customerChoice }}</p>
+        {{ baristaPrompt }}
+        {{ customerChoice }}
+        {{ choiceValue }}
+        {{ machineMake }}
+        {{ finishedBrew }}
+    </div>
+</script>
+
+<!-- Vue machine component template -->
+<script type="text/x-template" id="machineTemplate">
+    <div class="coffeeMachine">
+        Now Brewing:
+        <p>{{ machineMake }}</p>
     </div>
 </script>
 
