@@ -24,7 +24,7 @@ Vue.component("customer", {
                 this.$emit("french");
             }
 
-            if (this.customerChoice == "aeroPress") {
+            if (cdthis.customerChoice == "aeroPress") {
                 //you ***CAN'T*** emit camelCased strings
                 this.$emit("aero");
             }
