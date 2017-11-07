@@ -22,6 +22,7 @@ class Grid extends Component {
     render(){
         return(
             <div>
+                The Grid Component Content
             </div>
         )
     }
