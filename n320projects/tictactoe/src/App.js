@@ -42,7 +42,8 @@ class DataStore {
     }
 
     switchPlayer(currentPlayer) {
-        if (currentPlayer === "x") {
+        //validate that currentPlayer is either x or o
+        if (currentPlayer === "x" || currentPlayer === "o") {
             console.log("Switch Player method in DataStore called. Current player is " + currentPlayer);
             this.registeredWatchers.map((watcher) => {
                 watcher.switchPlayer(currentPlayer);
@@ -84,11 +85,10 @@ class Box extends Component {
 
     handleClick() {
         //try a test dispatch
-        console.log("handleClick turn prop =" + this.props.turn);
         if (this.props.turn === "x") {
             inputDispatcher.dispatch({type: "play", player: "x", playerMove: "x", row: this.props.rowNum, col: this.props.colNum,});
             // this.props.turn = "o";
-        } else if (this.prop.turn === "o") {
+        } else if (this.props.turn === "o") {
             inputDispatcher.dispatch({type: "play", player: "o", playerMove: "o", row: this.props.rowNum, col: this.props.colNum,});
             // this.props.turn = "x";
         }
