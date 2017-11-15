@@ -45,6 +45,7 @@ class DataStore {
         //validate that currentPlayer is either x or o
         if (currentPlayer === "x" || currentPlayer === "o") {
             console.log("Switch Player method in DataStore called. Current player is " + currentPlayer);
+            //dispatch the currentPlayer to the switchPlayer() method in Grid component (the watcher)
             this.registeredWatchers.map((watcher) => {
                 watcher.switchPlayer(currentPlayer);
             })
@@ -121,7 +122,7 @@ class Grid extends Component {
             this.setState({
                 turn: "o"
             })
-        } else if (this.state.turn === "o") {
+        } else if (currentPlayer === "o" && this.state.turn === "o") {
             this.setState({
                 turn: "x"
             })
@@ -132,7 +133,8 @@ class Grid extends Component {
         return (
             <div>
                 {
-                    data.inputs.map((row, rowNum) => {
+                    //data.inputs.map((row, rowNum) => {}
+                    this.state.inputs.map((row, rowNum) => {
                         return (
                             <div className="row">
                                 {
