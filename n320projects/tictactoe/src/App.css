@@ -39,3 +39,13 @@ h1 {
   display: flex;
   margin-bottom: 5px;
 }
+
+button {
+  height: 50px;
+  width: 100%;
+  border: none;
+  background: white;
+  opacity: 0.5;
+  color: #2e2e2e;
+
+}
