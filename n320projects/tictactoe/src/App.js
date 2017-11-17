@@ -20,7 +20,7 @@ class DataStore {
         this.registeredWatchers = [];
     }
 
-    //add a new watcher to the list
+    //add a new watcher (component) to the list
     register(watcher) {
         this.registeredWatchers.push(watcher);
     }
@@ -31,7 +31,7 @@ class DataStore {
             //if empty, update data with user input
             this.data[row][col] = newInputState;
 
-            //inform all watching objects..
+            //inform all watching objects (in this case, App and Grid components)..
             this.registeredWatchers.map((watcher) => {
                 watcher.dataUpdated();
             });
@@ -43,7 +43,6 @@ class DataStore {
     switchPlayer(currentPlayer) {
         //validate that currentPlayer is either x or o
         if (currentPlayer === "x" || currentPlayer === "o") {
-            console.log("Switch Player method in DataStore called. Current player is " + currentPlayer);
             //dispatch the currentPlayer to the switchPlayer() method in Grid & App component (the watchers) for data consistency
             this.registeredWatchers.map((watcher) => {
                 watcher.switchPlayer(currentPlayer);
@@ -62,9 +61,15 @@ class DataStore {
     }
 
     resetGame(action) {
-        if (action === "resetGame") {
+        if (action) {
+            this.data = [
+                ["", "", ""],
+                ["", "", ""],
+                ["", "", ""]
+            ];
+
             //dispatch commanding action to App component
-            this.registeredWatchers[0].resetGame(action);
+            this.registeredWatchers[0].resetGame(this.data);
         }
     }
 }
@@ -129,13 +134,12 @@ class Grid extends Component {
     }
 
     dataUpdated() {
-        this.setState({
-            inputs: inputDataStore.data
-        })
+            this.setState({
+                inputs: inputDataStore.data
+            })
     }
 
     switchPlayer(currentPlayer) {
-        console.log("Grid Switch Player Method says this.state.turn is " + this.state.turn);
         if (currentPlayer === "x" && this.state.turn === "x") {
             this.setState({
                 turn: "o"
@@ -150,6 +154,7 @@ class Grid extends Component {
     render() {
         return (
             <div>
+                {console.log(this.state.inputs)}
                 {
                     //data.inputs.map((row, rowNum) => {}
                     this.state.inputs.map((row, rowNum) => {
@@ -231,18 +236,9 @@ class App extends Component {
         }
     }
 
-    resetGame(action) {
-        if (action === "resetGame") {
-            this.setState({
-                inputs: [
-                    ["", "", ""],
-                    ["", "", ""],
-                    ["", "", ""]
-                ],
-                currentPlayer: "x",
-                winner: "",
-                takenSpace: false
-            });
+    resetGame(data) {
+        if (data) {
+
         }
     }
 
@@ -259,13 +255,13 @@ class App extends Component {
 
     renderText() {
         if (this.state.winner === "" && this.state.takenSpace === false) {
-            return <p>It is now player {this.state.currentPlayer}'s turn.</p>
-        } else if (this.state.winner === "x" || this.state.winner === "o" && this.state.takenSpace === false) {
-            return <p>Player {this.state.winner} is the winner.</p>
+            return (<p>It is now player {this.state.currentPlayer}'s turn.</p>)
+        } else if ((this.state.winner === "x" || this.state.winner === "o") && this.state.takenSpace === false) {
+            return (<p>Player {this.state.winner} is the winner.</p>)
         } else if (this.state.winner === "tie" && this.state.takenSpace === false) {
-            return <p>The match ended in a {this.state.winner}.</p>
+            return (<p>The match ended in a {this.state.winner}.</p>)
         } else if (this.state.takenSpace === true) {
-            return <p>Don't select a space that is being used.</p>
+            return (<p>Don't select a space that is being used.</p>)
         }
     }
 
@@ -287,49 +283,41 @@ inputDispatcher.register((action) => {
         if (data.inputs[0][0] === action.playerMove &&
             data.inputs[0][1] === action.playerMove &&
             data.inputs[0][2] === action.playerMove) {
-            console.log("Player " + action.player + " wins");
             inputDataStore.winner(action.player);
         } else
         if (data.inputs[0][0] === action.playerMove &&
             data.inputs[1][1] === action.playerMove &&
             data.inputs[2][2] === action.playerMove) {
-            console.log("Player " + action.player + " wins");
             inputDataStore.winner(action.player);
         } else
         if (data.inputs[0][0] === action.playerMove &&
             data.inputs[1][0] === action.playerMove &&
             data.inputs[2][0] === action.playerMove) {
-            console.log("Player " + action.player + " wins");
             inputDataStore.winner(action.player);
         } else
         if (data.inputs[0][1] === action.playerMove &&
             data.inputs[1][1] === action.playerMove &&
             data.inputs[2][1] === action.playerMove) {
-            console.log("Player " + action.player + " wins");
             inputDataStore.winner(action.player);
         } else
         if (data.inputs[0][2] === action.playerMove &&
             data.inputs[1][2] === action.playerMove &&
             data.inputs[2][2] === action.playerMove) {
-            console.log("Player " + action.player + " wins");
             inputDataStore.winner(action.player);
         }  else
         if (data.inputs[0][2] === action.playerMove &&
             data.inputs[1][1] === action.playerMove &&
             data.inputs[2][0] === action.playerMove) {
-            console.log("Player " + action.player + " wins");
             inputDataStore.winner(action.player);
         }  else
         if (data.inputs[1][0] === action.playerMove &&
             data.inputs[1][1] === action.playerMove &&
             data.inputs[1][2] === action.playerMove) {
-            console.log("Player " + action.player + " wins");
             inputDataStore.winner(action.player);
         } else
         if (data.inputs[2][0] === action.playerMove &&
             data.inputs[2][1] === action.playerMove &&
             data.inputs[2][2] === action.playerMove) {
-            console.log("Player " + action.player + " wins");
             inputDataStore.winner(action.player);
         } else
         if (data.inputs[0][0] !== "" &&
