@@ -11,3 +11,7 @@ ul {
 ul:last-child {
   margin-top: 15px;
 }
+
+li {
+  cursor: pointer;
+}
