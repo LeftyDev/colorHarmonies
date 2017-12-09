@@ -61,6 +61,8 @@ class Display extends Component {
         //make sure this stays a React component
         super(props);
 
+        console.log("Display component prop data: " + this.props.harmonyColor + " " + this.props.harmonyHex);
+
         //set states to the props being sent to component dynamically
         this.state = {
             color: this.props.colorChoice,
@@ -68,6 +70,15 @@ class Display extends Component {
             harmonyColor: this.props.harmonyColor,
             harmonyHex: this.props.harmonyHex
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            color: nextProps.colorChoice,
+            harmony: nextProps.harmonyChoice,
+            harmonyColor: nextProps.harmonyColor,
+            harmonyHex: nextProps.harmonyHex
+        });
     }
 
     render() {
@@ -140,10 +151,12 @@ class App extends Component {
 
     onDataChange() {
         console.log("onDataChange() in App called");
+        console.log(appState.harmonyColor + " " + appState.harmonyHex);
+
         this.setState({
             harmonyColor: appState.harmonyColor,
             harmonyHex: appState.harmonyHex
-        })
+        });
     }
 
     render() {
