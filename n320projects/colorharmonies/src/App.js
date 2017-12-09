@@ -170,7 +170,7 @@ class Picker extends Component {
                     <li onClick={() => {this.props.colorChosen('green')}}>Green</li>
                     <li onClick={() => {this.props.colorChosen('blue')}}>Blue</li>
                     <li onClick={() => {this.props.colorChosen('orange')}}>Orange</li>
-                    <li onClick={() => {this.props.colorChosen('yellow')}}>Yellow</li>
+                    <li onClick={() => {this.props.colorChosen('violet')}}>Violet</li>
                 </ul>
                 <ul> <b>Pick a Harmony</b>
                     <li onClick={() => {this.props.harmonyChosen('direct')}}>Direct</li>
