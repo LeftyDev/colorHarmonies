@@ -25,7 +25,7 @@ class DataStore {
 
     constructor(data) {
         //store that data in the object
-        //data is not being received from object instance of dataStore on line 190
+        //data is not being received from object instance of dataStore on line 189
         this.data = data;
 
         //empty array for our watchers
@@ -105,7 +105,6 @@ class App extends Component {
         //register App component as a watcher for a change in data
         harmoniesDataStore.register(this);
     }
-
 
     colorChosen(color) {
         //make sure first array is emptied before passing in the color
