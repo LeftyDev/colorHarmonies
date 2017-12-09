@@ -14,6 +14,11 @@ fetch("data/data.json").then((response) => {
     data = JSON.parse(textResponse);
 });
 
+let appState = {
+    harmonyColor: 'green',
+    harmonyHex: '#00FF00'
+};
+
 class DataStore {
 
     constructor(data) {
@@ -29,7 +34,23 @@ class DataStore {
     register(watcher) {
         this.registeredWatchers.push(watcher);
     }
+
+    displayHarmonies(color, harmony) {
+        console.log(color + " is the color and " + harmony + " is the harmony...and dataStore.displayHarmonies says: " + this.data);
+
+        this.registeredWatchers.map((watcher) => {
+            let result = "not green";
+            let resultHex = "#HEX";
+
+            appState.harmonyColor = result;
+            appState.harmonyHex = resultHex;
+
+            watcher.onDataChange();
+        })
+    }
 }
+
+
 
 class Display extends Component {
     constructor(props) {
@@ -37,7 +58,9 @@ class Display extends Component {
 
         this.state = {
             color: this.props.colorChoice,
-            harmony: this.props.harmonyChoice
+            harmony: this.props.harmonyChoice,
+            harmonyColor: this.props.harmonyColor,
+            harmonyHex: this.props.harmonyHex
         }
     }
 
@@ -46,32 +69,65 @@ class Display extends Component {
             <div>
                 <p>Color: {this.state.color}</p>
                 <p>Harmony: {this.state.harmony}</p>
+                <p>Harmony Color: {this.state.harmonyColor} ({this.state.harmonyHex})</p>
             </div>
         )
     }
 }
 
+//initiate array for sending selections to dataStore
+let colorAndHarmony = [['red'],['direct']];
+
 class App extends Component {
+    //constructor for the App controller component
     constructor(props) {
+        //make sure this stays a React component
         super(props);
 
+        //initiate states
         this.state = {
             currentColor: "red",
-            currentHarmony: "direct"
+            currentHarmony: "direct",
+            harmonyColor: appState.harmonyColor,
+            harmonyHex: appState.harmonyHex
         };
 
-        inputDataStore.register(this);
+        //register App component as a watcher for a change in data
+        harmoniesDataStore.register(this);
     }
 
     colorChosen(color) {
+        colorAndHarmony[0].length = 0;
+        colorAndHarmony[0].push(color);
+
+        this.selectHarmonies(colorAndHarmony[0][0], colorAndHarmony[1][0]);
+
         this.setState({
             currentColor: color
-        })
+        });
     }
 
     harmonyChosen(harmony) {
+        colorAndHarmony[1].length = 0;
+        colorAndHarmony[1].push(harmony);
+        // console.log(colorAndHarmony[0][0] + colorAndHarmony[1][0]);
+
+        this.selectHarmonies(colorAndHarmony[0][0], colorAndHarmony[1][0]);
+
         this.setState({
             currentHarmony: harmony
+        });
+    }
+
+    selectHarmonies(color, harmony) {
+        harmoniesDataStore.displayHarmonies(color, harmony);
+    }
+
+    onDataChange() {
+        console.log("onDataChange() in App called");
+        this.setState({
+            harmonyColor: appState.harmonyColor,
+            harmonyHex: appState.harmonyHex
         })
     }
 
@@ -80,7 +136,7 @@ class App extends Component {
             <div className="App">
                 <h1>Color Harmonies</h1>
                 <Picker colorChosen={this.colorChosen.bind(this)} harmonyChosen={this.harmonyChosen.bind(this)}/>
-                {this.state.currentColor === "red" && this.state.currentHarmony === "direct" ? <Display colorChoice={this.state.currentColor} harmonyChoice={this.state.currentHarmony} /> : null}
+                <Display colorChoice={this.state.currentColor} harmonyChoice={this.state.currentHarmony} harmonyColor={this.state.harmonyColor} harmonyHex={this.state.harmonyHex} />
             </div>
         );
     }
@@ -108,7 +164,7 @@ class Picker extends Component {
     }
 }
 
-
-let inputDataStore = new DataStore(data);
+//make an instance of the dataStore
+let harmoniesDataStore = new DataStore(data);
 
 export default App;
