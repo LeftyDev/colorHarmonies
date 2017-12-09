@@ -62,16 +62,16 @@ class DataStore {
 
     resetGame(action) {
         if (action) {
-            // this.data = [
-            //     ["", "", ""],
-            //     ["", "", ""],
-            //     ["", "", ""]
-            // ];
-            //
-            // //dispatch commanding action to App component
-            // this.registeredWatchers.map((watcher) => {
-            //     watcher.resetGame(this.data)
-            // });
+            this.data = [
+                ["", "", ""],
+                ["", "", ""],
+                ["", "", ""]
+            ];
+
+            //dispatch commanding action to App component
+            this.registeredWatchers.map((watcher) => {
+                watcher.resetGame(this.data)
+            });
         }
     }
 }
@@ -155,10 +155,10 @@ class Grid extends Component {
 
     resetGame(data) {
         //doesn't work properly?
-        // this.setState({
-        //     inputs: data,
-        //     turn: "x"
-        // })
+        this.setState({
+            inputs: data,
+            turn: "x"
+        })
     }
 
     render() {
@@ -246,14 +246,15 @@ class App extends Component {
     }
 
     resetGame(data) {
+        console.log(data);
         if (data) {
             //doesn't work properly??
-            // this.setState({
-            //     inputs: data,
-            //     currentPlayer: "x",
-            //     winner: "",
-            //     takenSpace: false
-            // })
+            this.setState({
+                inputs: data,
+                currentPlayer: "x",
+                winner: "",
+                takenSpace: false
+            })
         }
     }
 
