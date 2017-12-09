@@ -63,7 +63,7 @@ class Display extends Component {
 
         console.log("Display component prop data: " + this.props.harmonyColor + " " + this.props.harmonyHex);
 
-        //set states to the props being sent to component dynamically
+        //set states
         this.state = {
             color: this.props.colorChoice,
             harmony: this.props.harmonyChoice,
@@ -72,6 +72,9 @@ class Display extends Component {
         }
     }
 
+    //calls when App component parent rerenders and sends its new states over to Display child component as props
+    //built-in react component
+    //receives updated props from parent and pushes in as variable called nextProps rather than using this.props
     componentWillReceiveProps(nextProps) {
         this.setState({
             color: nextProps.colorChoice,
@@ -84,7 +87,6 @@ class Display extends Component {
     render() {
         return (
             <div>
-                {/* these aren't changing even though states are being set */}
                 <p><b>Color:</b> {this.state.color}</p>
                 <p><b>Harmony:</b> {this.state.harmony}</p>
                 <p><b>Harmony Color(s):</b> {this.state.harmonyColor} ({this.state.harmonyHex})</p>
