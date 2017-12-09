@@ -74,9 +74,9 @@ class Display extends Component {
         return (
             <div>
                 {/* these aren't changing even though states are being set */}
-                <p>Color: {this.state.color}</p>
-                <p>Harmony: {this.state.harmony}</p>
-                <p>Harmony Color: {this.state.harmonyColor} ({this.state.harmonyHex})</p>
+                <p><b>Color:</b> {this.state.color}</p>
+                <p><b>Harmony:</b> {this.state.harmony}</p>
+                <p><b>Harmony Color(s):</b> {this.state.harmonyColor} ({this.state.harmonyHex})</p>
             </div>
         )
     }
@@ -163,7 +163,7 @@ class Picker extends Component {
     render() {
         return(
             <div>
-                <ul className="colors">
+                <ul className="colors"> <b>Pick a Color</b>
                     {/* Picker uses methods from App as props...onClicks passes values into them */}
                     <li onClick={() => {this.props.colorChosen('red')}}>Red</li>
                     <li onClick={() => {this.props.colorChosen('yellow')}}>Yellow</li>
@@ -172,7 +172,7 @@ class Picker extends Component {
                     <li onClick={() => {this.props.colorChosen('orange')}}>Orange</li>
                     <li onClick={() => {this.props.colorChosen('yellow')}}>Yellow</li>
                 </ul>
-                <ul>
+                <ul> <b>Pick a Harmony</b>
                     <li onClick={() => {this.props.harmonyChosen('direct')}}>Direct</li>
                     <li onClick={() => {this.props.harmonyChosen('split')}}>Split</li>
                     <li onClick={() => {this.props.harmonyChosen('analogous')}}>Analogous</li>
