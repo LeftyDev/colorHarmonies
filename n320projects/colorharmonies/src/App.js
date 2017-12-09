@@ -25,7 +25,7 @@ class DataStore {
 
     constructor(data) {
         //store that data in the object
-        //data is not being received from object instance of dataStore on line 189
+        //data is not being received from object instance of dataStore on line 187
         this.data = data;
 
         //empty array for our watchers
@@ -54,8 +54,6 @@ class DataStore {
         })
     }
 }
-
-
 
 class Display extends Component {
     //constructor
