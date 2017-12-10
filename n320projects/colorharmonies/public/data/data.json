@@ -1,230 +1,228 @@
 {
   "colors": [
     {
-      "id": 1,
       "color": "red",
       "hex": "#FF0000",
-      "harmonies": [1, 1, 1]
+      "harmonies": [
+        {
+          "harmony": "direct",
+          "color": "green",
+          "hex": "#00FF00"
+        },
+        {
+          "harmony": "split",
+          "colors": [
+            {
+              "color": "yellow",
+              "hex": "#FFFF00"
+            },
+            {
+              "color": "blue",
+              "hex": "#0000FF"
+            }
+          ]
+        },
+        {
+          "harmony": "analogous",
+          "colors": [
+            {
+              "color": "orange",
+              "hex": "#FF8C00"
+            },
+            {
+              "color": "violet",
+              "hex": "#FF00FF"
+            }
+          ]
+        }
+      ]
     },
     {
-      "id": 2,
       "color": "yellow",
       "hex": "#FFFF00",
-      "harmonies": [2, 2, 2]
+      "harmonies": [
+        {
+          "harmony": "direct",
+          "color": "violet",
+          "hex": "#FF00FF"
+        },
+        {
+          "harmony": "split",
+          "colors": [
+            {
+              "color": "red",
+              "hex": "#FF0000"
+            },
+            {
+              "color": "blue",
+              "hex": "#0000FF"
+            }
+          ]
+        },
+        {
+          "harmony": "analogous",
+          "colors": [
+            {
+              "color": "green",
+              "hex": "#00FF00"
+            },
+            {
+              "color": "orange",
+              "hex": "#FF8C00"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 3,
       "color": "green",
       "hex": "#00FF00",
-      "harmonies": [3, 3, 3]
+      "harmonies": [
+        {
+          "harmony": "direct",
+          "color": "red",
+          "hex": "#FF0000"
+        },
+        {
+          "harmony": "split",
+          "colors": [
+            {
+              "color": "orange",
+              "hex": "#FF8C00"
+            },
+            {
+              "color": "violet",
+              "hex": "#FF00FF"
+            }
+          ]
+        },
+        {
+          "harmony": "analogous",
+          "colors": [
+            {
+              "color": "yellow",
+              "hex": "#FFFF00"
+            },
+            {
+              "color": "blue",
+              "hex": "#0000FF"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 4,
       "color": "blue",
       "hex": "#0000FF",
-      "harmonies": [4, 4, 4]
+      "harmonies": [
+        {
+          "harmony": "direct",
+          "color": "orange",
+          "hex": "#FF8C00"
+        },
+        {
+          "harmony": "split",
+          "colors": [
+            {
+              "color": "red",
+              "hex": "#FF0000"
+            },
+            {
+              "color": "yellow",
+              "hex": "#FFFF00"
+            }
+          ]
+        },
+        {
+          "harmony": "analogous",
+          "colors": [
+            {
+              "color": "green",
+              "hex": "#00FF00"
+            },
+            {
+              "color": "violet",
+              "hex": "#FF00FF"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 5,
       "color": "orange",
       "hex": "#FF8C00",
-      "harmonies": [5, 5, 5]
+      "harmonies": [
+        {
+          "harmony": "direct",
+          "color": "blue",
+          "hex": "#0000FF"
+        },
+        {
+          "harmony": "split",
+          "colors": [
+            {
+              "color": "green",
+              "hex": "#00FF00"
+            },
+            {
+              "color": "violet",
+              "hex": "#FF00FF"
+            }
+          ]
+        },
+        {
+          "harmony": "analogous",
+          "colors": [
+            {
+              "color": "red",
+              "hex": "#FF0000"
+            },
+            {
+              "color": "yellow",
+              "hex": "#FFFF00"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 6,
       "color": "violet",
       "hex": "#FF00FF",
-      "harmonies": [6, 6, 6]
-    }
-  ],
-  "directHarmonies": [
-    {
-      "id": 1,
-      "color": "green",
-      "hex": "#00FF00"
-    },
-    {
-      "id": 2,
-      "color": "violet",
-      "hex": "#FF00FF"
-    },
-    {
-      "id": 3,
-      "color": "red",
-      "hex": "#FF0000"
-    },
-    {
-      "id": 4,
-      "color": "orange",
-      "hex": "#FF8C00"
-    },
-    {
-      "id": 5,
-      "color": "blue",
-      "hex": "#0000FF"
-    },
-    {
-      "id": 6,
-      "color": "yellow",
-      "hex": "#FFFF00"
-    }
-  ],
-  "splitHarmonies": [
-    {
-      "id": 1,
-      "colors": [
+      "harmonies": [
         {
+          "harmony": "direct",
           "color": "yellow",
           "hex": "#FFFF00"
         },
         {
-          "color": "blue",
-          "hex": "#0000FF"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "colors": [
-        {
-          "color": "red",
-          "hex": "#FF0000"
+          "harmony": "split",
+          "colors": [
+            {
+              "color": "green",
+              "hex": "#00FF00"
+            },
+            {
+              "color": "orange",
+              "hex": "#FF8C00"
+            }
+          ]
         },
         {
-          "color": "blue",
-          "hex": "#0000FF"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "colors": [
-        {
-          "color": "orange",
-          "hex": "#FF8C00"
-        },
-        {
-          "color": "violet",
-          "hex": "#FF00FF"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "colors": [
-        {
-          "color": "red",
-          "hex": "#FF0000"
-        },
-        {
-          "color": "yellow",
-          "hex": "#FFFF00"
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "colors": [
-        {
-          "color": "green",
-          "hex": "#00FF00"
-        },
-        {
-          "color": "violet",
-          "hex": "#FF00FF"
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "colors": [
-        {
-          "color": "green",
-          "hex": "#00FF00"
-        },
-        {
-          "color": "orange",
-          "hex": "#FF8C00"
-        }
-      ]
-    }
-  ],
-  "analogousHarmonies": [
-    {
-      "id": 1,
-      "colors": [
-        {
-          "color": "orange",
-          "hex": "#FF8C00"
-        },
-        {
-          "color": "violet",
-          "hex": "#FF00FF"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "colors": [
-        {
-          "color": "green",
-          "hex": "#00FF00"
-        },
-        {
-          "color": "orange",
-          "hex": "#FF8C00"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "colors": [
-        {
-          "color": "yellow",
-          "hex": "#FFFF00"
-        },
-        {
-          "color": "blue",
-          "hex": "#0000FF"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "colors": [
-        {
-          "color": "green",
-          "hex": "#00FF00"
-        },
-        {
-          "color": "violet",
-          "hex": "#FF00FF"
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "colors": [
-        {
-          "color": "red",
-          "hex": "#FF0000"
-        },
-        {
-          "color": "yellow",
-          "hex": "#FFFF00"
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "colors": [
-        {
-          "color": "red",
-          "hex": "#FF0000"
-        },
-        {
-          "color": "blue",
-          "hex": "#0000FF"
+          "harmony": "analogous",
+          "colors": [
+            {
+              "color": "red",
+              "hex": "#FF0000"
+            },
+            {
+              "color": "blue",
+              "hex": "#0000FF"
+            }
+          ]
         }
       ]
     }

@@ -2,19 +2,6 @@ import React, {Component} from 'react';
 import './App.css';
 import _ from 'underscore';
 
-let data = [];
-
-//use polyfill for older browsers to do Ajax request
-fetch("data/data.json").then((response) => {
-    //if we actually got something
-    if (response.ok) {
-        //then return the text we loaded
-        return response.text();
-    }
-}).then((textResponse) => {
-    data = JSON.parse(textResponse);
-});
-
 //set initial harmony state values for initial color (red)
 let appState = {
     harmonyColor: 'green',
@@ -23,11 +10,7 @@ let appState = {
 
 class DataStore {
 
-    constructor(data) {
-        //store that data in the object
-        //data is not being received from object instance of dataStore on line 187
-        this.data = data;
-
+    constructor() {
         //empty array for our watchers
         //watchers are objects that want to be informed about when the data changes
         this.registeredWatchers = [];
@@ -39,19 +22,47 @@ class DataStore {
     }
 
     displayHarmonies(color, harmony) {
-        //color and harmony pass in dynamically just fine...this.data will not return anything, not even "undefined"
-        console.log(color + " is the color and " + harmony + " is the harmony...and dataStore.displayHarmonies says: " + this.data);
+        let data = {};
 
-        this.registeredWatchers.map((watcher) => {
-            let result = "not green"; //result and resultHex will be determined with an underscore statement that will associate the color & harmony choice (primary + foreign key concept) and will return correct harmony color(s)
-            let resultHex = "#HEX";
+        fetch("data/data.json").then((response) => {
+            //if we actually got something
+            if (response.ok) {
+                //then return the text we loaded
+                return response.text();
+            }
+        }).then((textResponse) => {
+            data = JSON.parse(textResponse);
 
-            appState.harmonyColor = result;
-            appState.harmonyHex = resultHex;
+            this.registeredWatchers.map((watcher) => {
+                console.log(harmony);
+                console.log(data.colors);
 
-            //call to app component's onDataChange() method, where new states will be set using the the appState data we just set in lines 49 and 50
-            watcher.onDataChange();
-        })
+                let result = "";
+                let resultHex = "";
+
+                let colorData = _.where(data.colors, {color: color});
+
+                let findHarmony = _.where(colorData[0].harmonies, {harmony: harmony});
+                console.log(findHarmony);
+                console.log(findHarmony[0].colors);
+
+                if (harmony === "direct") {
+                    result = findHarmony[0].color;
+                    resultHex = findHarmony[0].hex;
+
+                } else if (harmony === "split" || harmony === "analogous") {
+                    result = findHarmony[0].colors[0].color + ", " + findHarmony[0].colors[1].color;
+                    resultHex = findHarmony[0].colors[0].hex + ", " + findHarmony[0].colors[1].hex;
+
+                }
+
+                appState.harmonyColor = result;
+                appState.harmonyHex = resultHex;
+
+                //call to app component's onDataChange() method, where new states will be set using the the appState data we just set in lines 49 and 50
+                watcher.onDataChange();
+            })
+        });
     }
 }
 
@@ -73,7 +84,7 @@ class Display extends Component {
     }
 
     //calls when App component parent rerenders and sends its new states over to Display child component as props
-    //built-in react component
+    //built-in react method
     //receives updated props from parent and pushes in as variable called nextProps rather than using this.props
     componentWillReceiveProps(nextProps) {
         this.setState({
@@ -152,8 +163,7 @@ class App extends Component {
     }
 
     onDataChange() {
-        console.log("onDataChange() in App called");
-        console.log(appState.harmonyColor + " " + appState.harmonyHex);
+        console.log("onDataChange - using appStates: " + appState.harmonyColor + " " + appState.harmonyHex);
 
         this.setState({
             harmonyColor: appState.harmonyColor,
@@ -199,6 +209,6 @@ class Picker extends Component {
 
 //make an instance of the dataStore
 //pass in data variable from line 15
-let harmoniesDataStore = new DataStore(data);
+let harmoniesDataStore = new DataStore();
 
 export default App;
