@@ -8,10 +8,96 @@ ul {
   padding: 0;
 }
 
-ul:last-child {
-  margin-top: 15px;
-}
-
 li {
   cursor: pointer;
+}
+
+ul.harmonies {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+ul.colors {
+  display: flex;
+  justify-content: center;
+}
+
+li.color {
+  margin: 15px 0 15px 0;
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
+}
+
+
+
+li.color:nth-child(1) {
+  background: #e74c3c;
+}
+
+li.color:nth-child(2) {
+  background: #f1c40f;
+}
+
+li.color:nth-child(3) {
+  background: #2ecc71;
+}
+
+li.color:nth-child(4) {
+  background: #3498db;
+}
+
+li.color:nth-child(5) {
+  background: #e67e22;
+}
+
+li.color:nth-child(6) {
+  background: #9b59b6;
+}
+
+li.color:hover {
+  border: 10px solid #d9e1e6;
+  box-sizing: border-box;
+  line-height: 80px;
+ }
+
+li.harmony {
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
+}
+
+li.activeHarmony {
+  background: #d9e1e6;
+}
+
+div.displayColor {
+  height: 100px;
+  width: 200px;
+  margin: auto;
+}
+
+div.displayRed {
+  background: #e74c3c;
+}
+
+div.displayYellow {
+  background: #f1c40f;
+}
+
+div.displayGreen {
+  background: #2ecc71;
+}
+
+div.displayBlue {
+  background: #3498db;
+}
+
+div.displayOrange {
+  background: #e67e22;
+}
+
+div.displayViolet {
+  background: #9b59b6;
 }

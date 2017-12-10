@@ -5,7 +5,7 @@ import _ from 'underscore';
 //set initial harmony state values for initial color (red)
 let appState = {
     harmonyColor: 'green',
-    harmonyHex: '#00FF00'
+    harmonyHex: '(#2ecc71)'
 };
 
 class DataStore {
@@ -22,6 +22,7 @@ class DataStore {
     }
 
     displayHarmonies(color, harmony) {
+        //initialize data object
         let data = {};
 
         fetch("data/data.json").then((response) => {
@@ -31,35 +32,40 @@ class DataStore {
                 return response.text();
             }
         }).then((textResponse) => {
+            //assigned parsed json to data object
             data = JSON.parse(textResponse);
 
             this.registeredWatchers.map((watcher) => {
                 console.log(harmony);
                 console.log(data.colors);
 
+                //initialize results
                 let result = "";
                 let resultHex = "";
 
+                //filter color data by color selection and assign to colorData
                 let colorData = _.where(data.colors, {color: color});
 
+                //filter harmony data by colorData and assign to findHarmony
                 let findHarmony = _.where(colorData[0].harmonies, {harmony: harmony});
                 console.log(findHarmony);
                 console.log(findHarmony[0].colors);
 
+                //conditionals since split and analogous harmonies output more than a single result color
                 if (harmony === "direct") {
                     result = findHarmony[0].color;
-                    resultHex = findHarmony[0].hex;
+                    resultHex = "(" + findHarmony[0].hex + ")";
 
                 } else if (harmony === "split" || harmony === "analogous") {
-                    result = findHarmony[0].colors[0].color + ", " + findHarmony[0].colors[1].color;
-                    resultHex = findHarmony[0].colors[0].hex + ", " + findHarmony[0].colors[1].hex;
-
+                    result = findHarmony[0].colors[0].color + " (" +  findHarmony[0].colors[0].hex + "), ";
+                    resultHex = findHarmony[0].colors[1].color + " (" + findHarmony[0].colors[1].hex + ")";
                 }
 
+                //assign new result and resultHex to appState values
                 appState.harmonyColor = result;
                 appState.harmonyHex = resultHex;
 
-                //call to app component's onDataChange() method, where new states will be set using the the appState data we just set in lines 49 and 50
+                //call to app component's onDataChange() method, where new states will be set using the new appState data
                 watcher.onDataChange();
             })
         });
@@ -100,7 +106,36 @@ class Display extends Component {
             <div>
                 <p><b>Color:</b> {this.state.color}</p>
                 <p><b>Harmony:</b> {this.state.harmony}</p>
-                <p><b>Harmony Color(s):</b> {this.state.harmonyColor} ({this.state.harmonyHex})</p>
+                <p><b>Harmony Color(s):</b> {this.state.harmonyColor && this.state.harmonyHex ? this.state.harmonyColor + " " + this.state.harmonyHex : null}</p>
+                {console.log(this.state.harmonyColor + " x " + this.state.harmonyHex)}
+
+                {/* The Harmony Color display box renders for Direct color scheme */}
+                <div className={this.state.harmonyColor === "red" ? "displayColor displayRed" : null}></div>
+                <div className={this.state.harmonyColor === "yellow" ? "displayColor displayYellow" : null}></div>
+                <div className={this.state.harmonyColor === "green" ? "displayColor displayGreen" : null}></div>
+                <div className={this.state.harmonyColor === "blue" ? "displayColor displayBlue" : null}></div>
+                <div className={this.state.harmonyColor === "orange" ? "displayColor displayOrange" : null}></div>
+                <div className={this.state.harmonyColor === "violet" ? "displayColor displayViolet" : null}></div>
+
+
+                {/* The Harmony Color display box renders for split and analogous color schemes */}
+                <div className={this.state.harmonyColor === "yellow (#f1c40f), " && this.state.harmonyHex === "blue (#3498db)" ? "displayColor displayYellow" : null}></div>
+                <div className={this.state.harmonyColor === "yellow (#f1c40f), " && this.state.harmonyHex === "blue (#3498db)" ? "displayColor displayBlue" : null}></div>
+
+                <div className={this.state.harmonyColor === "red (#e74c3c), " && this.state.harmonyHex === "blue (#3498db)" ? "displayColor displayRed" : null}></div>
+                <div className={this.state.harmonyColor === "red (#e74c3c), " && this.state.harmonyHex === "blue (#3498db)" ? "displayColor displayBlue" : null}></div>
+
+                <div className={this.state.harmonyColor === "orange (#e67e22), " && this.state.harmonyHex === "violet (#9b59b6)" ? "displayColor displayOrange" : null}></div>
+                <div className={this.state.harmonyColor === "orange (#e67e22), " && this.state.harmonyHex === "violet (#9b59b6)" ? "displayColor displayViolet" : null}></div>
+
+                <div className={this.state.harmonyColor === "red (#e74c3c), " && this.state.harmonyHex === "yellow (#f1c40f)" ? "displayColor displayRed" : null}></div>
+                <div className={this.state.harmonyColor === "red (#e74c3c), " && this.state.harmonyHex === "yellow (#f1c40f)" ? "displayColor displayYellow" : null}></div>
+
+                <div className={this.state.harmonyColor === "green (#2ecc71), " && this.state.harmonyHex === "violet (#9b59b6)" ? "displayColor displayGreen" : null}></div>
+                <div className={this.state.harmonyColor === "green (#2ecc71), " && this.state.harmonyHex === "violet (#9b59b6)" ? "displayColor displayViolet" : null}></div>
+
+                <div className={this.state.harmonyColor === "green (#2ecc71), " && this.state.harmonyHex === "orange (#e67e22)" ? "displayColor displayGreen" : null}></div>
+                <div className={this.state.harmonyColor === "green (#2ecc71), " && this.state.harmonyHex === "orange (#e67e22)" ? "displayColor displayOrange" : null}></div>
             </div>
         )
     }
@@ -121,7 +156,8 @@ class App extends Component {
             currentColor: "red",
             currentHarmony: "direct",
             harmonyColor: appState.harmonyColor,
-            harmonyHex: appState.harmonyHex
+            harmonyHex: appState.harmonyHex,
+            activeHarmony: "direct"
         };
 
         //register App component as a watcher for a change in data
@@ -151,14 +187,15 @@ class App extends Component {
         //send this.SelectHarmonies() method the chosen harmony
         this.selectHarmonies(colorAndHarmony[0][0], colorAndHarmony[1][0]);
 
-        //update state to chosen harmony
+        //update state to chosen harmony, and make sure activeHarmony is set for a conditional in Picker component
         this.setState({
-            currentHarmony: harmony
+            currentHarmony: harmony,
+            activeHarmony: harmony
         });
     }
 
     selectHarmonies(color, harmony) {
-        //send the chosen color and harmony to the displayHarmonies() method in DataStore to determine what harmony color(s) to display determined by color & harmony choice
+        //send the chosen color and harmony to the displayHarmonies() method in DataStore to determine what harmony color(s) to display, determined by color & harmony choice
         harmoniesDataStore.displayHarmonies(color, harmony);
     }
 
@@ -176,7 +213,7 @@ class App extends Component {
             <div className="App">
                 <h1>Color Harmonies</h1>
                 {/* assigns this.colorChosen() & this.harmonyChosen() methods as properties to be called in Picker component */}
-                <Picker colorChosen={this.colorChosen.bind(this)} harmonyChosen={this.harmonyChosen.bind(this)}/>
+                <Picker colorChosen={this.colorChosen.bind(this)} harmonyChosen={this.harmonyChosen.bind(this)} activeHarmony={this.state.activeHarmony}/>
                 {/* give Display component props that are dynamically set with states */}
                 <Display colorChoice={this.state.currentColor} harmonyChoice={this.state.currentHarmony} harmonyColor={this.state.harmonyColor} harmonyHex={this.state.harmonyHex} />
             </div>
@@ -188,19 +225,21 @@ class Picker extends Component {
     render() {
         return(
             <div>
-                <ul className="colors"> <b>Pick a Color</b>
+                <b>Pick a Color</b>
+                <ul className="colors">
                     {/* Picker uses methods from App as props...onClicks passes values into them */}
-                    <li onClick={() => {this.props.colorChosen('red')}}>Red</li>
-                    <li onClick={() => {this.props.colorChosen('yellow')}}>Yellow</li>
-                    <li onClick={() => {this.props.colorChosen('green')}}>Green</li>
-                    <li onClick={() => {this.props.colorChosen('blue')}}>Blue</li>
-                    <li onClick={() => {this.props.colorChosen('orange')}}>Orange</li>
-                    <li onClick={() => {this.props.colorChosen('violet')}}>Violet</li>
+                    <li onClick={() => {this.props.colorChosen('red')}} className="color">Red</li>
+                    <li onClick={() => {this.props.colorChosen('yellow')}} className="color">Yellow</li>
+                    <li onClick={() => {this.props.colorChosen('green')}} className="color">Green</li>
+                    <li onClick={() => {this.props.colorChosen('blue')}} className="color">Blue</li>
+                    <li onClick={() => {this.props.colorChosen('orange')}} className="color">Orange</li>
+                    <li onClick={() => {this.props.colorChosen('violet')}} className="color">Violet</li>
                 </ul>
-                <ul> <b>Pick a Harmony</b>
-                    <li onClick={() => {this.props.harmonyChosen('direct')}}>Direct</li>
-                    <li onClick={() => {this.props.harmonyChosen('split')}}>Split</li>
-                    <li onClick={() => {this.props.harmonyChosen('analogous')}}>Analogous</li>
+                <b>Pick a Harmony</b>
+                <ul className="harmonies">
+                    <li onClick={() => {this.props.harmonyChosen('direct')}} className={this.props.activeHarmony === "direct" ? "activeHarmony harmony" : "harmony"}>Direct</li>
+                    <li onClick={() => {this.props.harmonyChosen('split')}} className={this.props.activeHarmony === "split" ? "activeHarmony harmony" : "harmony"}>Split</li>
+                    <li onClick={() => {this.props.harmonyChosen('analogous')}} className={this.props.activeHarmony === "analogous" ? "activeHarmony harmony" : "harmony"}>Analogous</li>
                 </ul>
             </div>
         )
