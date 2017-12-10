@@ -151,7 +151,7 @@ class App extends Component {
         //make sure this stays a React component
         super(props);
 
-        //initiate states
+        // 1. initiate states
         this.state = {
             currentColor: "red",
             currentHarmony: "direct",
@@ -212,7 +212,7 @@ class App extends Component {
         return (
             <div className="App">
                 <h1>Color Harmonies</h1>
-                {/* assigns this.colorChosen() & this.harmonyChosen() methods as properties to be called in Picker component */}
+                {/* 1. assigns App's colorChosen() & harmonyChosen() methods as properties to be called in Picker component */}
                 <Picker colorChosen={this.colorChosen.bind(this)} harmonyChosen={this.harmonyChosen.bind(this)} activeHarmony={this.state.activeHarmony}/>
                 {/* give Display component props that are dynamically set with states */}
                 <Display colorChoice={this.state.currentColor} harmonyChoice={this.state.currentHarmony} harmonyColor={this.state.harmonyColor} harmonyHex={this.state.harmonyHex} />
@@ -227,7 +227,7 @@ class Picker extends Component {
             <div>
                 <b>Pick a Color</b>
                 <ul className="colors">
-                    {/* Picker uses methods from App as props...onClicks passes values into them */}
+                    {/* 2. Picker uses methods from App as props...onClicks passes values into them */}
                     <li onClick={() => {this.props.colorChosen('red')}} className="color">Red</li>
                     <li onClick={() => {this.props.colorChosen('yellow')}} className="color">Yellow</li>
                     <li onClick={() => {this.props.colorChosen('green')}} className="color">Green</li>
