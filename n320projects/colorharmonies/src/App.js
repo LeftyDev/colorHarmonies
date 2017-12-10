@@ -237,6 +237,7 @@ class Picker extends Component {
                 </ul>
                 <b>Pick a Harmony</b>
                 <ul className="harmonies">
+                    {/* 2.5. Picker uses methods from App as props...onClicks passes values into them */}
                     <li onClick={() => {this.props.harmonyChosen('direct')}} className={this.props.activeHarmony === "direct" ? "activeHarmony harmony" : "harmony"}>Direct</li>
                     <li onClick={() => {this.props.harmonyChosen('split')}} className={this.props.activeHarmony === "split" ? "activeHarmony harmony" : "harmony"}>Split</li>
                     <li onClick={() => {this.props.harmonyChosen('analogous')}} className={this.props.activeHarmony === "analogous" ? "activeHarmony harmony" : "harmony"}>Analogous</li>
